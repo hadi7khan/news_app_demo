@@ -76,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: const [
               Center(
                   child: Text(
-                "Mobile First",
+                "News App",
                 style: TextStyle(
                   color: Color.fromARGB(255, 38, 33, 33),
                   fontWeight: FontWeight.w700,
