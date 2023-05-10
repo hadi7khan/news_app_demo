@@ -1,11 +1,14 @@
 import 'package:assignment/drawer.dart';
 import 'package:assignment/src/features/authentication/presentation/view/login_screen.dart';
 import 'package:assignment/src/features/authentication/presentation/view_model/sign_in.dart';
+import 'package:assignment/src/features/news/data/models/cart_model.dart';
 import 'package:assignment/src/features/news/presentation/view/news_detail_screen.dart';
+import 'package:assignment/src/features/news/presentation/view_model/local_storage.dart';
 import 'package:assignment/src/features/news/presentation/view_model/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,6 +19,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List cartItems = [];
+  CartModel cart = CartModel();
+  final LocalStorageRepository _localStorageRepository =
+      LocalStorageRepository();
+  Box<CartModel>? box;
   @override
   void initState() {
     super.initState();
@@ -120,7 +128,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return NewsDetailsScreen(index: index, newsDetails: value.news);
+                                          return NewsDetailsScreen(
+                                              index: index,
+                                              newsDetails: value.news);
                                         },
                                       ),
                                     );
@@ -147,6 +157,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ? ""
                                               : value.news!.articles![index]
                                                   .author!),
+                                      trailing: InkWell(
+                                        onTap: () async {
+                                          _localStorageRepository.addCartItem(
+                                              box!,
+                                              CartModel(
+                                                  id: index,
+                                                  author: value.news!.articles![index].author,
+                                                  title: value.news!.articles![index].title,
+                                                  description: value.news!.articles![index].description));
+                                        },
+                                        child: Icon(
+                                          Icons.bookmark,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 );
