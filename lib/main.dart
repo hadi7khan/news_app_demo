@@ -1,12 +1,18 @@
 import 'package:assignment/src/features/news/presentation/view/tabs_screen.dart';
+import 'package:assignment/src/features/news/presentation/view_model/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 import 'src/features/authentication/presentation/view/login_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<NewsAdp>(create: (context) => NewsAdp()),
+    ],
+    child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
