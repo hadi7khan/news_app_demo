@@ -14,7 +14,7 @@ class NewsAdp extends ChangeNotifier {
     newshttpCode = "";
   }
 
-  refreshNotifications(String token) {
+  refreshNews() {
     resetNews();
     notifyListeners();
     getNews(
