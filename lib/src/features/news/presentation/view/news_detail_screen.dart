@@ -57,7 +57,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                   // height: 300.0,
                   // width: double.infinity,
                   imageUrl:
-                      widget.newsDetails!.articles![widget.index!].urlToImage!,
+                      widget.newsDetails!.articles![widget.index!].urlToImage == null ? "": widget.newsDetails!.articles![widget.index!].urlToImage!,
                   fit: BoxFit.cover,
                   placeholder: ((context, url) => const Center(
                         child: CircularProgressIndicator(),
@@ -87,7 +87,7 @@ class _NewsDetailsScreenState extends State<NewsDetailsScreen> {
                       top: 10.0,
                     ),
                     child: Text(
-                      widget.newsDetails!.articles![widget.index!].author!,
+                      widget.newsDetails!.articles![widget.index!].author == null ? "" : widget.newsDetails!.articles![widget.index!].author!,
                       style: const TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,

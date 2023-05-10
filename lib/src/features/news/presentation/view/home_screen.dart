@@ -28,6 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     Provider.of<NewsAdp>(context, listen: false).getNews();
+    openBox();
+  }
+  openBox() async {
+    box = await _localStorageRepository.openBox();
   }
 
   Future<Null> refresh() {
